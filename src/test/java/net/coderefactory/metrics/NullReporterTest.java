@@ -1,15 +1,14 @@
 package net.coderefactory.metrics;
 
 
-import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 
 public class NullReporterTest {
@@ -39,10 +38,10 @@ public class NullReporterTest {
 
     @Test
     public void testReport() {
-        reporter.report(anySortedMap(), anySortedMap(), anySortedMap(), anySortedMap(), anySortedMap());
+        reporter.report(sortedMap(), sortedMap(), sortedMap(), sortedMap(), sortedMap());
     }
 
-    static SortedMap anySortedMap() {
-        return any(SortedMap.class);
+    static SortedMap sortedMap() {
+        return new TreeMap();
     }
 }
