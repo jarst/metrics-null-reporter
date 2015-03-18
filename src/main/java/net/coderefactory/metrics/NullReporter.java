@@ -8,13 +8,13 @@ import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * NullReporter is a {@link ScheduledReporter} that doesn't report anything.
+ * Use it to discard all collected metrics data.
  * @author jarst
  */
 public class NullReporter extends ScheduledReporter {
 
-    public static final Logger logger = LoggerFactory.getLogger(NullReporter.class);
-
+    private final Logger logger;
     private final String name;
 
     /**
@@ -27,8 +27,14 @@ public class NullReporter extends ScheduledReporter {
      */
     protected NullReporter(final MetricRegistry registry, final String name,
                            final MetricFilter filter, final TimeUnit rateUnit, final TimeUnit durationUnit) {
+        this(registry, name, LoggerFactory.getLogger(NullReporter.class), filter, rateUnit, durationUnit);
+    }
+
+    private NullReporter(final MetricRegistry registry, final String name, final Logger logger,
+                         final MetricFilter filter, final TimeUnit rateUnit, final TimeUnit durationUnit) {
         super(registry, name, filter, rateUnit, durationUnit);
         this.name = name;
+        this.logger = logger;
         logger.info("Creating NullReporter: {}", name);
     }
 
@@ -56,4 +62,34 @@ public class NullReporter extends ScheduledReporter {
         // This method will not be invoked.
     }
 
+
+    public static Builder forRegistry(final MetricRegistry registry) {
+        return new Builder(registry);
+    }
+
+    public static class Builder {
+        private final MetricRegistry registry;
+        private Logger logger;
+        private String name;
+
+        private Builder(final MetricRegistry registry) {
+            this.registry = registry;
+            this.logger = LoggerFactory.getLogger("metrics");
+            this.name = "default";
+        }
+
+        public Builder logger(final Logger logger) {
+            this.logger = logger;
+            return this;
+        }
+
+        public Builder name(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public NullReporter build() {
+            return new NullReporter(registry, name, logger, MetricFilter.ALL, TimeUnit.HOURS, TimeUnit.HOURS);
+        }
+    }
 }

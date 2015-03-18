@@ -19,7 +19,7 @@ public class NullReporterIntegrationTest {
     @Test
     public void testReporter() {
         final MetricRegistry metrics = new MetricRegistry();
-        final ScheduledReporter reporter = spy(new NullReporter(metrics, "name", MetricFilter.ALL, TimeUnit.HOURS, TimeUnit.HOURS));
+        final ScheduledReporter reporter = spy(NullReporter.forRegistry(metrics).build());
 
         try {
             reporter.start(10, TimeUnit.MILLISECONDS);

@@ -19,7 +19,7 @@ public class NullReporterTest {
     @Before
     public void before() {
         MetricRegistry metrics = mock(MetricRegistry.class);
-        reporter = new NullReporter(metrics, "name", MetricFilter.ALL, TimeUnit.HOURS, TimeUnit.HOURS);
+        reporter = NullReporter.forRegistry(metrics).build();
     }
 
     @Test
