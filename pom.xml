@@ -11,9 +11,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <dependencies>
         <dependency>
-            <groupId>com.codahale.metrics</groupId>
+            <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
@@ -39,7 +39,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
