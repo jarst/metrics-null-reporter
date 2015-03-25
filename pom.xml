@@ -9,6 +9,10 @@
     <name>Metrics Null Reporter</name>
     <description>Additional reporter for Coda Hale's metrics that discards all reports</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
